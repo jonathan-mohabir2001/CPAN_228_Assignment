@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 // annotation packages imported 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/clothes")
 // annotate the class as a controller and set the route to /
-public class HomeController {
+public class ClothesController {
 
   @RequestMapping
   // annotate this method in order for routing to function.
-  public String home() {
-    return "home";
+  public String clothes() {
+    return "clothes";
   }
 
 }
