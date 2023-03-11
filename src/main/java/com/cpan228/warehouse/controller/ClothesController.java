@@ -1,22 +1,41 @@
-/*
- * Class below is the controller for the Home Page for the / route 
- */
-
 package com.cpan228.warehouse.controller;
 
+import com.cpan228.warehouse.model.Clothing;
+import com.cpan228.warehouse.repository.ClothingRepository;
+
+import lombok.Builder;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-// annotation packages imported 
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/clothes")
-// annotate the class as a controller and set the route to /
 public class ClothesController {
 
-  @RequestMapping
-  // annotate this method in order for routing to function.
-  public String clothes() {
-    return "clothes";
+  @Autowired
+  private ClothingRepository clothingRepository;
+
+  @GetMapping
+  public String showAddForm(Model model) {
+    model.addAttribute("clothing", Clothing.builder().build());
+    return "addClothing";
+  }
+
+  @PostMapping("/add")
+  public String addClothing(@ModelAttribute("clothing") Clothing clothing) {
+    clothingRepository.save(clothing);
+    return "redirect:/clothes/list";
+  }
+
+  @GetMapping("/list")
+  public String showClothingList(Model model) {
+    List<Clothing> clothingList = clothingRepository.findAll();
+    model.addAttribute("clothingList", clothingList);
+    return "listOfClothing";
   }
 
 }

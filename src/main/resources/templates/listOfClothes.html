@@ -1,0 +1,28 @@
+<!--HTML TO RETURN LIST OF CLOTHES -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clothing List</title>
+  </head>
+  <body>
+    <h1>Clothing List</h1>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Year Produced</th>
+        <th>Price</th>
+        <th>Brand</th>
+      </tr>
+      <!-- Loop through the list of clothes and display them in a table -->
+      <!-- Assuming that you have a model attribute named "clothesList" which is a List of Clothing objects -->
+      <!-- Change the name accordingly if it's different in your code -->
+      <tr th:each="clothing : ${clothesList}">
+        <td th:text="${clothing.name}"></td>
+        <td th:text="${clothing.yearProduced}"></td>
+        <td th:text="${clothing.price}"></td>
+        <td th:text="${clothing.brand.title}"></td>
+      </tr>
+    </table>
+  </body>
+</html>
